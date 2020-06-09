@@ -35,6 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="SoftwareBase">
+      <HintPath>..\..\SoftwareBase\SoftwareBase\bin\Release\netstandard2.0\SoftwareBase.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
