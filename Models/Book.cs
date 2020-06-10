@@ -12,6 +12,5 @@ namespace BookWishList.Models
         public string Titel { get; set; }
         public string Price { get; set; }
         public string Description { get; set; }
-        public Uri URL { get; set; }
     }
 }
