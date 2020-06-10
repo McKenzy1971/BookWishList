@@ -32,7 +32,7 @@ namespace BookWishList.View
 
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
-            _mainWindowViewModel.Load();
+            _mainWindowViewModel.InitialLoad();
         }
     }
 }
