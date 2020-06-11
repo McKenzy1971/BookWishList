@@ -4,4 +4,8 @@
     <Style TargetType="Grid" x:Key="DarkBackground">
         <Setter Property="Background" Value="#FF000519"/>
     </Style>
+    <Style TargetType="TextBlock" x:Key="Header">
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontSize" Value="20"/>
+    </Style>
 </ResourceDictionary>

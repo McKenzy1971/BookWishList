@@ -31,10 +31,15 @@
         <ListView Grid.Row="1" Margin="10" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding Books}" SelectedItem="{Binding SelectedBook}" DisplayMemberPath="Titel">
         </ListView>
         
-        <Button x:Name="btnAddNewBook" Grid.Column="1" Content="Neus Buch hinzufügen"/>
+        <Button x:Name="btnAddNewBook" Grid.Column="1" Content="Neues Buch hinzufügen"/>
 
         <StackPanel Orientation="Vertical" Margin="10" Grid.Row="1" Grid.Column="1">
-            <TextBlock Text="{Binding SelectedBook.Titel}" Foreground="White"/>
+            <TextBlock Style="{StaticResource Header}" Text="Buchtitel:" Foreground="White"/>
+            <TextBlock Text="{Binding SelectedBook.Titel}" Foreground="White" Margin="10"/>
+            <TextBlock Style="{StaticResource Header}" Text="Beschreibung:" Foreground="White"/>
+            <TextBlock Text="{Binding SelectedBook.Description}" Foreground="White" Margin="10"/>
+            <TextBlock Style="{StaticResource Header}" Text="Preis:" Foreground="White"/>
+            <TextBlock Text="{Binding SelectedBook.Price}" Foreground="White" Margin="10"/>
         </StackPanel>
     </Grid>
 </Window>
