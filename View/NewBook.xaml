@@ -1,0 +1,25 @@
+﻿<Window x:Class="BookWishList.View.NewBook"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookWishList.View"
+        mc:Ignorable="d"
+        Title="Neues Buch hinzufügen" Height="400" Width="600">
+
+    <Window.Resources>
+        <ResourceDictionary Source="/View/External Recources/MainDictionary.xaml"/>
+    </Window.Resources>
+
+    <StackPanel Margin="10" Style="{StaticResource DarkBackgroundSP}">
+        
+        <TextBlock Style="{StaticResource Header}" Text="Titel:" Margin="10"/>
+        <TextBox Text="{Binding Book.Titel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock Style="{StaticResource Header}" Text="Beschreibung:" Margin="10"/>
+        <TextBox Text="{Binding Book.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBlock Style="{StaticResource Header}" Text="Preis:" Margin="10"/>
+        <TextBox Text="{Binding Book.Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Content="Speichern" Command="{Binding SaveCommand}" Margin="50"/>
+        
+    </StackPanel>
+</Window>
