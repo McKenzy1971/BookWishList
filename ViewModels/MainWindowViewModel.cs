@@ -1,12 +1,10 @@
 ﻿using SoftwareBase.ViewModelBase;
 using BookWishList.Models;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System;
-using System.Runtime.Serialization;
 using System.Xml.Serialization;
-using System.Windows.Media.Animation;
+using BookWishList.View;
 
 namespace BookWishList.ViewModels
 {
@@ -17,13 +15,25 @@ namespace BookWishList.ViewModels
         public MainWindowViewModel()
         {
             Books = new ObservableCollection<Book>();
+            this.ShowNewBookWindow = new DelegateCommand<object>(ShowWindow, null);
         }
 
         #endregion
 
         #region Propertys
-
-        public ObservableCollection<Book> Books { get; private set; }
+        private ObservableCollection<Book> _books;
+        public ObservableCollection<Book> Books
+        {
+            get { return this._books; }
+            set
+            {
+                if(this._books != value)
+                {
+                    this._books = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         private Book _selectedBook;
         public Book SelectedBook
@@ -41,12 +51,30 @@ namespace BookWishList.ViewModels
 
         private string FolderPath { get; set; }
         #endregion
+        public DelegateCommand<object> ShowNewBookWindow { get; set; }
+        #region Methods
+
+        public void ShowWindow(object o)
+        {
+            NewBook nb = new NewBook();
+            nb.Show();
+            nb.ShowInTaskbar = true;
+        }
 
         public void InitialLoad()
         {
             this.FolderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\Bookywish";
             this.CheckDircetoryExist(FolderPath);
             this.CheckDataExist(FolderPath + @"\Bookywish.xml");
+        }
+        public void SaveBooks()
+        {
+            XmlSerializer xml = new XmlSerializer(typeof(ObservableCollection<Book>));
+            File.Delete(FolderPath + @"\Bookywish.xml");
+            using (Stream s = File.OpenWrite(FolderPath + @"\Bookywish.xml"))
+            {
+                xml.Serialize(s, this.Books);
+            } 
         }
 
         private void LoadBooks()
@@ -85,5 +113,6 @@ namespace BookWishList.ViewModels
             }
             this.LoadBooks();
         }
+        #endregion
     }
 }

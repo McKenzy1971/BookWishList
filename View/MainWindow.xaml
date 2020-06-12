@@ -3,18 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:BookWishList.View"
-        xmlns:vm="clr-namespace:BookWishList.ViewModels"
         mc:Ignorable="d"
         Title="Bookywish" Height="450" Width="800">
 
     <Window.Resources>
         <ResourceDictionary Source="/View/External Recources/MainDictionary.xaml"/>
     </Window.Resources>
-
-    <Window.DataContext>
-        <vm:MainWindowViewModel/>
-    </Window.DataContext>
 
     <Grid Style="{StaticResource DarkBackground}">
         <Grid.ColumnDefinitions>
@@ -30,11 +24,16 @@
         <TextBlock Text="Bücher auf der Wunschliste:" Foreground="White" TextAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10"/>
         <ListView Grid.Row="1" Margin="10" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding Books}" SelectedItem="{Binding SelectedBook}" DisplayMemberPath="Titel">
         </ListView>
-        
-        <Button x:Name="btnAddNewBook" Grid.Column="1" Content="Neus Buch hinzufügen"/>
+
+        <Button x:Name="btnAddNewBook" Grid.Column="1" Content="Neues Buch hinzufügen" Command="{Binding ShowNewBookWindow}"/>
 
         <StackPanel Orientation="Vertical" Margin="10" Grid.Row="1" Grid.Column="1">
-            <TextBlock Text="{Binding SelectedBook.Titel}" Foreground="White"/>
+            <TextBlock Style="{StaticResource Header}" Text="Buchtitel:"/>
+            <TextBlock Text="{Binding SelectedBook.Titel}" Foreground="White" Margin="10"/>
+            <TextBlock Style="{StaticResource Header}" Text="Beschreibung:"/>
+            <TextBlock Text="{Binding SelectedBook.Description}" Foreground="White" Margin="10"/>
+            <TextBlock Style="{StaticResource Header}" Text="Preis:"/>
+            <TextBlock Text="{Binding SelectedBook.Price}" Foreground="White" Margin="10"/>
         </StackPanel>
     </Grid>
 </Window>
