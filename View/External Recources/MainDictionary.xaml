@@ -10,9 +10,13 @@
         <Setter Property="FontSize" Value="20"/>
         <Setter Property="Foreground" Value="White"/>
     </Style>
-    
+
+    <Style TargetType="TextBlock" x:Key="WhiteFore">
+        <Setter Property="Foreground" Value="White"/>
+    </Style>
+
     <Style TargetType="StackPanel" x:Key="DarkBackgroundSP">
         <Setter Property="Background" Value="#FF000519"/>
     </Style>
-    
+
 </ResourceDictionary>

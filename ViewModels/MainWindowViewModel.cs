@@ -7,6 +7,7 @@ using System;
 using System.Xml.Serialization;
 using BookWishList.View;
 using System.Runtime.CompilerServices;
+using System.Windows;
 
 namespace BookWishList.ViewModels
 {
@@ -64,8 +65,16 @@ namespace BookWishList.ViewModels
 
         public void RemoveBook(Book book)
         {
-            this.Books.Remove(book);
-            this.SaveBooks();
+            MessageBoxResult messageBoxResult = MessageBox.Show("Möchtest du das Buch wirklich löschen?", "Löschen bestätigen", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No);
+            switch (messageBoxResult)
+            {
+                case MessageBoxResult.Yes:
+                    this.Books.Remove(book);
+                    this.SaveBooks();
+                    break;
+                case MessageBoxResult.No:
+                    return;
+            }
         }
 
         public void ShowWindow(object o)

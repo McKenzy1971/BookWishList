@@ -36,6 +36,7 @@ namespace BookWishList.ViewModels
             }
         }
         public DelegateCommand<object> SaveCommand { get; set; }
+        public Window Window { get; set; }
 
         #endregion
 
@@ -45,6 +46,7 @@ namespace BookWishList.ViewModels
         {
             ((MainWindow)Application.Current.MainWindow)._mainWindowViewModel.Books.Add(this.Book);
             ((MainWindow)Application.Current.MainWindow)._mainWindowViewModel.SaveBooks();
+            Window.Close();
         }
         #endregion
     }
