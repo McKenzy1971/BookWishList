@@ -26,6 +26,7 @@ namespace BookWishList.View
             InitializeComponent();
             _NewBookViewModel = new NewBookViewModel();
             DataContext = _NewBookViewModel;
+            _NewBookViewModel.Window = Window.GetWindow(this);
         }
     }
 }

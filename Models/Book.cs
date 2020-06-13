@@ -2,6 +2,8 @@
 
 namespace BookWishList.Models
 {
+    public enum Theme { Psychology, Novel, Photography, Thriller, SelfDiscovery, NonFiction }
+
     [Serializable]
     public class Book
     {
@@ -9,5 +11,6 @@ namespace BookWishList.Models
         public string Description { get; set; }
         public string Price { get; set; }
         public string Author { get; set; }
+        public Theme Theme { get; set; }
     }
 }
