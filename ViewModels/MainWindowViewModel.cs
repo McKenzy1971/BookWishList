@@ -6,6 +6,7 @@ using System.IO;
 using System;
 using System.Xml.Serialization;
 using BookWishList.View;
+using System.Runtime.CompilerServices;
 
 namespace BookWishList.ViewModels
 {
@@ -17,6 +18,7 @@ namespace BookWishList.ViewModels
         {
             Books = new ObservableCollection<Book>();
             this.ShowNewBookWindow = new DelegateCommand<object>(ShowWindow, null);
+            this.DeleteCommand = new DelegateCommand<Book>((Book b) => RemoveBook(b), null);
             this.MainFolder = new Folder();
             this.MainFolder.DirectoryPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\Bookywish\";
             this.MainFolder.AddFile("Bookywish.xml");
@@ -55,9 +57,16 @@ namespace BookWishList.ViewModels
         }
         private Folder MainFolder { get; set; }
         public DelegateCommand<object> ShowNewBookWindow { get; set; }
+        public DelegateCommand<Book> DeleteCommand { get; set; }
         #endregion
 
         #region Methods
+
+        public void RemoveBook(Book book)
+        {
+            this.Books.Remove(book);
+            this.SaveBooks();
+        }
 
         public void ShowWindow(object o)
         {
