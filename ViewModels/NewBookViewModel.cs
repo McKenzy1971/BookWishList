@@ -12,11 +12,16 @@ namespace BookWishList.ViewModels
 {
     public class NewBookViewModel : ViewModelBase
     {
+        #region Constructor
         public NewBookViewModel()
         {
-            this.Book = new Book() { Titel = "Beispieltitel", Description = "Besipeilhabsd", Price = "19,99€" };
+            this.Book = new Book() { Titel = "Dein Hasi", Description = "Bester Freund auf der Welt", Price = "Unbezahlbar", Author = "Dennis Schröter" };
             this.SaveCommand = new DelegateCommand<object>(Save, null);
         }
+        #endregion
+
+        #region Properties
+
         private Book _book;
         public Book Book
         {
@@ -32,10 +37,15 @@ namespace BookWishList.ViewModels
         }
         public DelegateCommand<object> SaveCommand { get; set; }
 
+        #endregion
+
+        #region Methods
+
         public void Save(object o)
         {
             ((MainWindow)Application.Current.MainWindow)._mainWindowViewModel.Books.Add(this.Book);
             ((MainWindow)Application.Current.MainWindow)._mainWindowViewModel.SaveBooks();
         }
+        #endregion
     }
 }

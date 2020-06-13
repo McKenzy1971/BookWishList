@@ -34,6 +34,9 @@
             <TextBlock Text="{Binding SelectedBook.Description}" Foreground="White" Margin="10"/>
             <TextBlock Style="{StaticResource Header}" Text="Preis:"/>
             <TextBlock Text="{Binding SelectedBook.Price}" Foreground="White" Margin="10"/>
+            <TextBlock Style="{StaticResource Header}" Text="Autor"/>
+            <TextBlock Text="{Binding SelectedBook.Author}" Foreground="White" Margin="10"/>
+            <Button Content="Buch löschen" Command="{Binding DeleteCommand}" CommandParameter="{Binding SelectedBook}"/>
         </StackPanel>
     </Grid>
 </Window>

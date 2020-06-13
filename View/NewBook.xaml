@@ -19,7 +19,9 @@
         <TextBox Text="{Binding Book.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBlock Style="{StaticResource Header}" Text="Preis:" Margin="10"/>
         <TextBox Text="{Binding Book.Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <Button Content="Speichern" Command="{Binding SaveCommand}" Margin="50"/>
+        <TextBlock Style="{StaticResource Header}" Text="Autor:" Margin="10"/>
+        <TextBox Text="{Binding Book.Author, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        <Button Content="Speichern" Command="{Binding SaveCommand}" Margin="40"/>
         
     </StackPanel>
 </Window>
