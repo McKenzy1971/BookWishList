@@ -1,4 +1,5 @@
 ﻿using SoftwareBase.ViewModelBase;
+using SoftwareBase;
 using BookWishList.Models;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -10,12 +11,16 @@ namespace BookWishList.ViewModels
 {
     public class MainWindowViewModel : ViewModelBase
     {
-        #region Constructors
+        #region Constructor
 
         public MainWindowViewModel()
         {
             Books = new ObservableCollection<Book>();
             this.ShowNewBookWindow = new DelegateCommand<object>(ShowWindow, null);
+            this.MainFolder = new Folder();
+            this.MainFolder.DirectoryPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\Bookywish\";
+            this.MainFolder.AddFile("Bookywish.xml");
+            this.MainFolder.SetActivFile("Bookywish.xml");
         }
 
         #endregion
@@ -27,7 +32,7 @@ namespace BookWishList.ViewModels
             get { return this._books; }
             set
             {
-                if(this._books != value)
+                if (this._books != value)
                 {
                     this._books = value;
                     OnPropertyChanged();
@@ -48,10 +53,10 @@ namespace BookWishList.ViewModels
                 }
             }
         }
-
-        private string FolderPath { get; set; }
-        #endregion
+        private Folder MainFolder { get; set; }
         public DelegateCommand<object> ShowNewBookWindow { get; set; }
+        #endregion
+
         #region Methods
 
         public void ShowWindow(object o)
@@ -63,25 +68,24 @@ namespace BookWishList.ViewModels
 
         public void InitialLoad()
         {
-            this.FolderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\Bookywish";
-            this.CheckDircetoryExist(FolderPath);
-            this.CheckDataExist(FolderPath + @"\Bookywish.xml");
+            this.CheckDircetoryExist(this.MainFolder.DirectoryPath);
+            this.CheckDataExist(this.MainFolder.File);
         }
         public void SaveBooks()
         {
             XmlSerializer xml = new XmlSerializer(typeof(ObservableCollection<Book>));
-            File.Delete(FolderPath + @"\Bookywish.xml");
-            using (Stream s = File.OpenWrite(FolderPath + @"\Bookywish.xml"))
+            File.Delete(this.MainFolder.File);
+            using (Stream s = File.OpenWrite(this.MainFolder.File))
             {
                 xml.Serialize(s, this.Books);
-            } 
+            }
         }
 
         private void LoadBooks()
         {
             ObservableCollection<Book> books;
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(ObservableCollection<Book>));
-            using (Stream s = File.OpenRead(FolderPath + @"\Bookywish.xml"))
+            using (Stream s = File.OpenRead(this.MainFolder.File))
             {
                 books = (ObservableCollection<Book>)xmlSerializer.Deserialize(s);
             }
@@ -94,7 +98,7 @@ namespace BookWishList.ViewModels
         private void CheckDircetoryExist(string path)
         {
             if (!Directory.Exists(path))
-                Directory.CreateDirectory(FolderPath);
+                Directory.CreateDirectory(this.MainFolder.DirectoryPath);
         }
 
         private void CheckDataExist(string path)
@@ -102,13 +106,9 @@ namespace BookWishList.ViewModels
             if (!File.Exists(path))
             {
                 XmlSerializer xml = new XmlSerializer(typeof(ObservableCollection<Book>));
-                using (Stream s = File.OpenWrite(FolderPath + @"\Bookywish.xml"))
+                using (Stream s = File.OpenWrite(this.MainFolder.File))
                 {
-                    xml.Serialize(s, new ObservableCollection<Book>()
-                    {
-                        new Book() { Titel = "Placeholder", Description = "Test", Price = "Kostenlos" },
-                        new Book() { Titel = "Placeholder2", Description = "Test2", Price = "Kostenlos2" }
-                    });
+                    xml.Serialize(s, new ObservableCollection<Book>());
                 }
             }
             this.LoadBooks();
