@@ -20,10 +20,8 @@ namespace BookWishList.ViewModels
             Books = new ObservableCollection<Book>();
             this.ShowNewBookWindow = new DelegateCommand<object>(ShowWindow, null);
             this.DeleteCommand = new DelegateCommand<Book>((Book b) => RemoveBook(b), null);
-            this.MainFolder = new Folder();
-            this.MainFolder.DirectoryPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\Bookywish\";
-            this.MainFolder.AddFile("Bookywish.xml");
-            this.MainFolder.SetActivFile("Bookywish.xml");
+            this.MainFolder = new Folder(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\Bookywish");
+            this.CheckDataExist(this.MainFolder.DirectoryPath + "Bookywish.xml");
         }
 
         #endregion
@@ -62,6 +60,32 @@ namespace BookWishList.ViewModels
         #endregion
 
         #region Methods
+        private void CheckDataExist(string path)
+        {
+            if (!File.Exists(path))
+            {
+                XmlSerializer xml = new XmlSerializer(typeof(ObservableCollection<Book>));
+                using (Stream s = File.OpenWrite(this.MainFolder.DirectoryPath + "Bookywish.xml"))
+                {
+                    xml.Serialize(s, new ObservableCollection<Book>() { new Book() { Titel = "Placeholder" } });
+                }
+            }
+            this.LoadBooks();
+        }
+
+        private void LoadBooks()
+        {
+            ObservableCollection<Book> books;
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(ObservableCollection<Book>));
+            using (Stream s = File.OpenRead(this.MainFolder.DirectoryPath + "Bookywish.xml"))
+            {
+                books = (ObservableCollection<Book>)xmlSerializer.Deserialize(s);
+            }
+            foreach (Book book in books)
+            {
+                Books.Add(book);
+            }
+        }
 
         public void RemoveBook(Book book)
         {
@@ -84,52 +108,14 @@ namespace BookWishList.ViewModels
             nb.ShowInTaskbar = true;
         }
 
-        public void InitialLoad()
-        {
-            this.CheckDircetoryExist(this.MainFolder.DirectoryPath);
-            this.CheckDataExist(this.MainFolder.File);
-        }
         public void SaveBooks()
         {
             XmlSerializer xml = new XmlSerializer(typeof(ObservableCollection<Book>));
-            File.Delete(this.MainFolder.File);
-            using (Stream s = File.OpenWrite(this.MainFolder.File))
+            File.Delete(this.MainFolder.DirectoryPath + "Bookywish.xml");
+            using (Stream s = File.Create(this.MainFolder.DirectoryPath + "Bookywish.xml"))
             {
                 xml.Serialize(s, this.Books);
             }
-        }
-
-        private void LoadBooks()
-        {
-            ObservableCollection<Book> books;
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(ObservableCollection<Book>));
-            using (Stream s = File.OpenRead(this.MainFolder.File))
-            {
-                books = (ObservableCollection<Book>)xmlSerializer.Deserialize(s);
-            }
-            foreach (Book book in books)
-            {
-                Books.Add(book);
-            }
-        }
-
-        private void CheckDircetoryExist(string path)
-        {
-            if (!Directory.Exists(path))
-                Directory.CreateDirectory(this.MainFolder.DirectoryPath);
-        }
-
-        private void CheckDataExist(string path)
-        {
-            if (!File.Exists(path))
-            {
-                XmlSerializer xml = new XmlSerializer(typeof(ObservableCollection<Book>));
-                using (Stream s = File.OpenWrite(this.MainFolder.File))
-                {
-                    xml.Serialize(s, new ObservableCollection<Book>());
-                }
-            }
-            this.LoadBooks();
         }
         #endregion
     }

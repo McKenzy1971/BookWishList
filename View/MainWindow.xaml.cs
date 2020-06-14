@@ -27,12 +27,6 @@ namespace BookWishList.View
             InitializeComponent();
             _mainWindowViewModel = new MainWindowViewModel();
             DataContext = _mainWindowViewModel;
-            this.Loaded += MainWindow_Loaded;
-        }
-
-        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
-        {
-            _mainWindowViewModel.InitialLoad();
         }
     }
 }
