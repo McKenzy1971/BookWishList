@@ -13,21 +13,25 @@ namespace BookWishList.ViewModels
     public class MainWindowViewModel : ViewModelBase
     {
         #region Constructor
-
         public MainWindowViewModel()
         {
             this.Books = new ObservableCollection<Book>();
-            this.ShowNewBookWindow = new DelegateCommand<object>(ShowWindow, null);
-            this.DeleteCommand = new DelegateCommand<Book>((Book b) => RemoveBook(b), null);
-            this.EditCommand = new DelegateCommand<Book>((Book b) => MessageBox.Show("Aktuell noch nicht Implementiert. Wird in einer zukünftigen Version Hinzugefügt", "Info", MessageBoxButton.OK, MessageBoxImage.Information), null);
+            this.ShowNewBookWindow = new DelegateCommand<object>(ShowWindow, (b) => this._isActiv);
+            this.DeleteCommand = new DelegateCommand<Book>((Book b) => RemoveBook(b), (b) => this._isActiv);
+            this.EditCommand = new DelegateCommand<Book>((Book b) => MessageBox.Show("Aktuell noch nicht Implementiert. Wird in einer zukünftigen Version Hinzugefügt",
+                                                                                        "Info", MessageBoxButton.OK, MessageBoxImage.Information), (b) => this._isActiv);
             this.MainFolder = new Folder(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\Bookywish");
             this.CheckDataExist(MainFolder.DirectoryPath + "Bookywish.xml");
         }
-
         #endregion
 
-        #region Propertys
+        #region Fields
+        private Book _selectedBook;
         private ObservableCollection<Book> _books;
+        private bool _isActiv = true;
+        #endregion
+
+        #region Properties
         public ObservableCollection<Book> Books
         {
             get { return _books; }
@@ -41,7 +45,6 @@ namespace BookWishList.ViewModels
             }
         }
 
-        private Book _selectedBook;
         public Book SelectedBook
         {
             get { return _selectedBook; }
@@ -73,7 +76,6 @@ namespace BookWishList.ViewModels
             }
             LoadBooks();
         }
-
         private void LoadBooks()
         {
             ObservableCollection<Book> books;
@@ -86,9 +88,9 @@ namespace BookWishList.ViewModels
             {
                 Books.Add(book);
             }
-            SelectedBook = Books[0];
+            if (this.Books.Count != 0)
+                SelectedBook = Books[0];
         }
-
         public void RemoveBook(Book book)
         {
             MessageBoxResult messageBoxResult = MessageBox.Show("Möchtest du das Buch wirklich löschen?", "Löschen bestätigen", MessageBoxButton.YesNo, MessageBoxImage.Warning, MessageBoxResult.No);
@@ -101,16 +103,16 @@ namespace BookWishList.ViewModels
                 case MessageBoxResult.No:
                     return;
             }
-            SelectedBook = Books[0];
+            if (this.Books.Count != 0)
+                this.SelectedBook = this.Books[0];
         }
-
         public void ShowWindow(object o)
         {
+            this.ChangeIsActiv(false);
             NewBook nb = new NewBook();
             nb.Show();
             nb.ShowInTaskbar = true;
         }
-
         public void SaveBooks()
         {
             XmlSerializer xml = new XmlSerializer(typeof(ObservableCollection<Book>));
@@ -119,6 +121,13 @@ namespace BookWishList.ViewModels
             {
                 xml.Serialize(s, Books);
             }
+        }
+        public void ChangeIsActiv(bool b)
+        {
+            this._isActiv = b;
+            this.ShowNewBookWindow.RaiseCanExecuteChanged();
+            this.DeleteCommand.RaiseCanExecuteChanged();
+            this.EditCommand.RaiseCanExecuteChanged();
         }
         #endregion
     }

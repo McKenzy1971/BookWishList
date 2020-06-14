@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Bookywish" Height="450" Width="800">
+        Title="Bookywish" Height="460" Width="850">
 
     <Window.Resources>
         <ResourceDictionary Source="/View/External Recources/MainDictionary.xaml"/>
@@ -18,7 +18,8 @@
         <Grid Style="{StaticResource MainStyle}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
@@ -28,8 +29,13 @@
 
             <TextBlock Style="{StaticResource MainTextStyle}" Text="Bücher auf der liste:" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <ListView Grid.Row="1" Margin="10" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding Books}" SelectedItem="{Binding SelectedBook}" DisplayMemberPath="Titel"/>
-            <Button x:Name="btnAddNewBook" Grid.Column="1" Content="Neues Buch hinzufügen" Command="{Binding ShowNewBookWindow}"/>
+            <Button Grid.Column="1" Content="Neues Buch hinzufügen" Command="{Binding ShowNewBookWindow}" Margin="5,5,2.5,5"/>
             
+            <DockPanel Grid.Column="2">
+                <Button Grid.Column="2" Content="Buch löschen" Command="{Binding DeleteCommand}" CommandParameter="{Binding SelectedBook}" Margin="2.5,5,5,5" DockPanel.Dock="Right"/>
+                <Button Content="Bearbeiten" Command="{Binding EditCommand}" CommandParameter="{Binding SelectedBook}" Margin="2.5,5,2.5,5"/>
+            
+            </DockPanel>
             <StackPanel Orientation="Vertical" Margin="10" Grid.Row="1" Grid.Column="1">
                 <TextBlock Style="{StaticResource MainTextStyle}" Text="Buchtitel:"/>
                 <TextBlock Style="{StaticResource MainDatas}" Text="{Binding SelectedBook.Titel}"/>
@@ -37,10 +43,10 @@
                 <TextBlock Style="{StaticResource MainDatas}" Text="{Binding SelectedBook.Description}"/>
                 <TextBlock Style="{StaticResource MainTextStyle}" Text="Preis:"/>
                 <TextBlock Style="{StaticResource MainDatas}" Text="{Binding SelectedBook.Price}"/>
-                <TextBlock Style="{StaticResource MainTextStyle}" Text="Autor"/>
+                <TextBlock Style="{StaticResource MainTextStyle}" Text="Autor:"/>
                 <TextBlock Style="{StaticResource MainDatas}" Text="{Binding SelectedBook.Author}"/>
-                <Button Content="Bearbeiten" Command="{Binding EditCommand}" CommandParameter="{Binding SelectedBook}"/>
-                <Button Content="Buch löschen" Command="{Binding DeleteCommand}" CommandParameter="{Binding SelectedBook}"/>
+                <TextBlock Style="{StaticResource MainTextStyle}" Text="Thema:"/>
+                <TextBlock Style="{StaticResource MainDatas}" Text="{Binding SelectedBook.Theme}"/>
             </StackPanel>
         </Grid>
     </Grid>
