@@ -1,13 +1,12 @@
-﻿using SoftwareBase.ViewModelBase;
-using SoftwareBase;
-using BookWishList.Models;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.IO;
-using System;
-using System.Xml.Serialization;
-using BookWishList.View;
-using System.Runtime.CompilerServices;
 using System.Windows;
+using System.Xml.Serialization;
+using BookWishList.Models;
+using BookWishList.View;
+using SoftwareBase;
+using SoftwareBase.ViewModelBase;
 
 namespace BookWishList.ViewModels
 {
@@ -17,13 +16,12 @@ namespace BookWishList.ViewModels
 
         public MainWindowViewModel()
         {
-            Books = new ObservableCollection<Book>();
+            this.Books = new ObservableCollection<Book>();
             this.ShowNewBookWindow = new DelegateCommand<object>(ShowWindow, null);
             this.DeleteCommand = new DelegateCommand<Book>((Book b) => RemoveBook(b), null);
-            this.MainFolder = new Folder();
-            this.MainFolder.DirectoryPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\Bookywish\";
-            this.MainFolder.AddFile("Bookywish.xml");
-            this.MainFolder.SetActivFile("Bookywish.xml");
+            this.EditCommand = new DelegateCommand<Book>((Book b) => MessageBox.Show("Aktuell noch nicht Implementiert. Wird in einer zukünftigen Version Hinzugefügt", "Info", MessageBoxButton.OK, MessageBoxImage.Information), null);
+            this.MainFolder = new Folder(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\Bookywish");
+            this.CheckDataExist(MainFolder.DirectoryPath + "Bookywish.xml");
         }
 
         #endregion
@@ -32,12 +30,12 @@ namespace BookWishList.ViewModels
         private ObservableCollection<Book> _books;
         public ObservableCollection<Book> Books
         {
-            get { return this._books; }
+            get { return _books; }
             set
             {
-                if (this._books != value)
+                if (_books != value)
                 {
-                    this._books = value;
+                    _books = value;
                     OnPropertyChanged();
                 }
             }
@@ -46,12 +44,12 @@ namespace BookWishList.ViewModels
         private Book _selectedBook;
         public Book SelectedBook
         {
-            get { return this._selectedBook; }
+            get { return _selectedBook; }
             set
             {
-                if (this._selectedBook != value)
+                if (_selectedBook != value)
                 {
-                    this._selectedBook = value;
+                    _selectedBook = value;
                     OnPropertyChanged();
                 }
             }
@@ -59,9 +57,37 @@ namespace BookWishList.ViewModels
         private Folder MainFolder { get; set; }
         public DelegateCommand<object> ShowNewBookWindow { get; set; }
         public DelegateCommand<Book> DeleteCommand { get; set; }
+        public DelegateCommand<Book> EditCommand { get; set; }
         #endregion
 
         #region Methods
+        private void CheckDataExist(string path)
+        {
+            if (!File.Exists(path))
+            {
+                XmlSerializer xml = new XmlSerializer(typeof(ObservableCollection<Book>));
+                using (Stream s = File.OpenWrite(MainFolder.DirectoryPath + "Bookywish.xml"))
+                {
+                    xml.Serialize(s, new ObservableCollection<Book>() { new Book() { Titel = "Placeholder" } });
+                }
+            }
+            LoadBooks();
+        }
+
+        private void LoadBooks()
+        {
+            ObservableCollection<Book> books;
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(ObservableCollection<Book>));
+            using (Stream s = File.OpenRead(MainFolder.DirectoryPath + "Bookywish.xml"))
+            {
+                books = (ObservableCollection<Book>)xmlSerializer.Deserialize(s);
+            }
+            foreach (Book book in books)
+            {
+                Books.Add(book);
+            }
+            SelectedBook = Books[0];
+        }
 
         public void RemoveBook(Book book)
         {
@@ -69,12 +95,13 @@ namespace BookWishList.ViewModels
             switch (messageBoxResult)
             {
                 case MessageBoxResult.Yes:
-                    this.Books.Remove(book);
-                    this.SaveBooks();
+                    Books.Remove(book);
+                    SaveBooks();
                     break;
                 case MessageBoxResult.No:
                     return;
             }
+            SelectedBook = Books[0];
         }
 
         public void ShowWindow(object o)
@@ -84,52 +111,14 @@ namespace BookWishList.ViewModels
             nb.ShowInTaskbar = true;
         }
 
-        public void InitialLoad()
-        {
-            this.CheckDircetoryExist(this.MainFolder.DirectoryPath);
-            this.CheckDataExist(this.MainFolder.File);
-        }
         public void SaveBooks()
         {
             XmlSerializer xml = new XmlSerializer(typeof(ObservableCollection<Book>));
-            File.Delete(this.MainFolder.File);
-            using (Stream s = File.OpenWrite(this.MainFolder.File))
+            File.Delete(MainFolder.DirectoryPath + "Bookywish.xml");
+            using (Stream s = File.Create(MainFolder.DirectoryPath + "Bookywish.xml"))
             {
-                xml.Serialize(s, this.Books);
+                xml.Serialize(s, Books);
             }
-        }
-
-        private void LoadBooks()
-        {
-            ObservableCollection<Book> books;
-            XmlSerializer xmlSerializer = new XmlSerializer(typeof(ObservableCollection<Book>));
-            using (Stream s = File.OpenRead(this.MainFolder.File))
-            {
-                books = (ObservableCollection<Book>)xmlSerializer.Deserialize(s);
-            }
-            foreach (Book book in books)
-            {
-                Books.Add(book);
-            }
-        }
-
-        private void CheckDircetoryExist(string path)
-        {
-            if (!Directory.Exists(path))
-                Directory.CreateDirectory(this.MainFolder.DirectoryPath);
-        }
-
-        private void CheckDataExist(string path)
-        {
-            if (!File.Exists(path))
-            {
-                XmlSerializer xml = new XmlSerializer(typeof(ObservableCollection<Book>));
-                using (Stream s = File.OpenWrite(this.MainFolder.File))
-                {
-                    xml.Serialize(s, new ObservableCollection<Book>());
-                }
-            }
-            this.LoadBooks();
         }
         #endregion
     }

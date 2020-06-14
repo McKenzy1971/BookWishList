@@ -10,33 +10,38 @@
         <ResourceDictionary Source="/View/External Recources/MainDictionary.xaml"/>
     </Window.Resources>
 
-    <Grid Style="{StaticResource DarkBackground}">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="3*"/>
-        </Grid.ColumnDefinitions>
+    <Grid Style="{StaticResource MainStyle}">
+        <Grid.Background>
+            <ImageBrush ImageSource="/View/Images/Bücher.png"/>
+        </Grid.Background>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="50"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        <Grid Style="{StaticResource MainStyle}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="3*"/>
+            </Grid.ColumnDefinitions>
 
-        <TextBlock Text="Bücher auf der Wunschliste:" Foreground="White" TextAlignment="Center" FontWeight="Bold" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="10"/>
-        <ListView Grid.Row="1" Margin="10" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding Books}" SelectedItem="{Binding SelectedBook}" DisplayMemberPath="Titel">
-        </ListView>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
 
-        <Button x:Name="btnAddNewBook" Grid.Column="1" Content="Neues Buch hinzufügen" Command="{Binding ShowNewBookWindow}"/>
-
-        <StackPanel Orientation="Vertical" Margin="10" Grid.Row="1" Grid.Column="1">
-            <TextBlock Style="{StaticResource Header}" Text="Buchtitel:"/>
-            <TextBlock Style="{StaticResource WhiteFore}" Text="{Binding SelectedBook.Titel}" Margin="10"/>
-            <TextBlock Style="{StaticResource Header}" Text="Beschreibung:"/>
-            <TextBlock Style="{StaticResource WhiteFore}" Text="{Binding SelectedBook.Description}" Margin="10"/>
-            <TextBlock Style="{StaticResource Header}" Text="Preis:"/>
-            <TextBlock Style="{StaticResource WhiteFore}" Text="{Binding SelectedBook.Price}" Margin="10"/>
-            <TextBlock Style="{StaticResource Header}" Text="Autor"/>
-            <TextBlock Style="{StaticResource WhiteFore}" Text="{Binding SelectedBook.Author}" Margin="10"/>
-            <Button Content="Buch löschen" Command="{Binding DeleteCommand}" CommandParameter="{Binding SelectedBook}"/>
-        </StackPanel>
+            <TextBlock Style="{StaticResource MainTextStyle}" Text="Bücher auf der liste:" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <ListView Grid.Row="1" Margin="10" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding Books}" SelectedItem="{Binding SelectedBook}" DisplayMemberPath="Titel"/>
+            <Button x:Name="btnAddNewBook" Grid.Column="1" Content="Neues Buch hinzufügen" Command="{Binding ShowNewBookWindow}"/>
+            
+            <StackPanel Orientation="Vertical" Margin="10" Grid.Row="1" Grid.Column="1">
+                <TextBlock Style="{StaticResource MainTextStyle}" Text="Buchtitel:"/>
+                <TextBlock Style="{StaticResource MainDatas}" Text="{Binding SelectedBook.Titel}"/>
+                <TextBlock Style="{StaticResource MainTextStyle}" Text="Beschreibung:"/>
+                <TextBlock Style="{StaticResource MainDatas}" Text="{Binding SelectedBook.Description}"/>
+                <TextBlock Style="{StaticResource MainTextStyle}" Text="Preis:"/>
+                <TextBlock Style="{StaticResource MainDatas}" Text="{Binding SelectedBook.Price}"/>
+                <TextBlock Style="{StaticResource MainTextStyle}" Text="Autor"/>
+                <TextBlock Style="{StaticResource MainDatas}" Text="{Binding SelectedBook.Author}"/>
+                <Button Content="Bearbeiten" Command="{Binding EditCommand}" CommandParameter="{Binding SelectedBook}"/>
+                <Button Content="Buch löschen" Command="{Binding DeleteCommand}" CommandParameter="{Binding SelectedBook}"/>
+            </StackPanel>
+        </Grid>
     </Grid>
 </Window>

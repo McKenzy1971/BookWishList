@@ -1,22 +1,18 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-
-    <Style TargetType="Grid" x:Key="DarkBackground">
-        <Setter Property="Background" Value="#FF000519"/>
+    
+    <Style TargetType="Grid" x:Key="MainStyle">
+        <Setter Property="Background" Value="#E5000000"/>
     </Style>
     
-    <Style TargetType="TextBlock" x:Key="Header">
+    <Style TargetType="TextBlock" x:Key="MainTextStyle">
+        <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="FontSize" Value="20"/>
+        <Setter Property="FontSize" Value="15"/>
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="MainDatas">
         <Setter Property="Foreground" Value="White"/>
+        <Setter Property="Margin" Value="7"/>
     </Style>
-
-    <Style TargetType="TextBlock" x:Key="WhiteFore">
-        <Setter Property="Foreground" Value="White"/>
-    </Style>
-
-    <Style TargetType="StackPanel" x:Key="DarkBackgroundSP">
-        <Setter Property="Background" Value="#FF000519"/>
-    </Style>
-
 </ResourceDictionary>
