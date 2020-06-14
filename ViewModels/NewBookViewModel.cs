@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using SoftwareBase.ViewModelBase;
-using System.Threading.Tasks;
+using System.Windows;
 using BookWishList.Models;
 using BookWishList.View;
-using System.Windows;
+using SoftwareBase.ViewModelBase;
 
 namespace BookWishList.ViewModels
 {
@@ -15,39 +14,48 @@ namespace BookWishList.ViewModels
         #region Constructor
         public NewBookViewModel()
         {
-            this.Book = new Book() { Titel = "Dein Hasi", Description = "Bester Freund auf der Welt", Price = "Unbezahlbar", Author = "Dennis Schröter" };
+            this.AddedBook = new Book() { Titel = "Dein Hasi", Description = "Bester Freund auf der Welt", Price = "Unbezahlbar", Author = "Dennis Schröter", Theme = Theme.Psychology };
             this.SaveCommand = new DelegateCommand<object>(Save, null);
         }
         #endregion
 
-        #region Properties
+        #region Fields
+        private Book _addedbook;
+        #endregion
 
-        private Book _book;
-        public Book Book
+        #region Properties
+        public Book AddedBook
         {
-            get { return this._book; }
+            get { return _addedbook; }
             set
             {
-                if (this._book != value)
+                if (_addedbook != value)
                 {
-                    this._book = value;
+                    _addedbook = value;
                     OnPropertyChanged();
                 }
             }
         }
+        public IEnumerable<Theme> Themes
+        {
+            get { return Enum.GetValues(typeof(Theme)).Cast<Theme>(); }
+        }
         public DelegateCommand<object> SaveCommand { get; set; }
         public Window Window { get; set; }
-
         #endregion
 
         #region Methods
-
         public void Save(object o)
         {
-            ((MainWindow)Application.Current.MainWindow)._mainWindowViewModel.Books.Add(this.Book);
+            ((MainWindow)Application.Current.MainWindow)._mainWindowViewModel.Books.Add(this.AddedBook);
             ((MainWindow)Application.Current.MainWindow)._mainWindowViewModel.SaveBooks();
-            Window.Close();
+            this.Window.Close();
         }
+        public void OnWindowClosing(object sender, CancelEventArgs e)
+        {
+            ((MainWindow)Application.Current.MainWindow)._mainWindowViewModel.ChangeIsActiv(true);
+        }
+
         #endregion
     }
 }

@@ -4,26 +4,36 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BookWishList.View"
+        xmlns:System="clr-namespace:System;assembly=System"
+        xmlns:test="clr-namespace:BookWishList.Models"
         mc:Ignorable="d"
         Title="Neues Buch hinzufügen" Height="400" Width="600">
 
     <Window.Resources>
         <ResourceDictionary Source="/View/External Recources/MainDictionary.xaml"/>
     </Window.Resources>
+    
     <Grid>
         <Grid.Background>
             <ImageBrush ImageSource="/View/Images/Bücher.png"/>
         </Grid.Background>
+
         <Grid Style="{StaticResource MainStyle}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
             <StackPanel Margin="10">
                 <TextBlock Style="{StaticResource MainTextStyle}" Text="Titel:"/>
-                <TextBox Text="{Binding Book.Titel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Text="{Binding AddedBook.Titel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Style="{StaticResource MainTextStyle}" Text="Beschreibung:" Margin="10"/>
-                <TextBox Text="{Binding Book.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Text="{Binding AddedBook.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Style="{StaticResource MainTextStyle}" Text="Preis:" Margin="10"/>
-                <TextBox Text="{Binding Book.Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Text="{Binding AddedBook.Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Style="{StaticResource MainTextStyle}" Text="Autor:" Margin="10"/>
-                <TextBox Text="{Binding Book.Author, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox Text="{Binding AddedBook.Author, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Style="{StaticResource MainTextStyle}" Text="Thema:" Margin="10"/>
+                <ComboBox SelectedValue="{Binding AddedBook.Theme, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }" ItemsSource="{Binding Themes}"/>
                 <Button Content="Speichern" Command="{Binding SaveCommand}" Margin="40"/>
             </StackPanel>
         </Grid>
