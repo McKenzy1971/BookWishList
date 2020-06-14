@@ -10,18 +10,22 @@
     <Window.Resources>
         <ResourceDictionary Source="/View/External Recources/MainDictionary.xaml"/>
     </Window.Resources>
-
-    <StackPanel Margin="10" Style="{StaticResource DarkBackgroundSP}">
-        
-        <TextBlock Style="{StaticResource Header}" Text="Titel:" Margin="10"/>
-        <TextBox Text="{Binding Book.Titel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBlock Style="{StaticResource Header}" Text="Beschreibung:" Margin="10"/>
-        <TextBox Text="{Binding Book.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBlock Style="{StaticResource Header}" Text="Preis:" Margin="10"/>
-        <TextBox Text="{Binding Book.Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <TextBlock Style="{StaticResource Header}" Text="Autor:" Margin="10"/>
-        <TextBox Text="{Binding Book.Author, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-        <Button Content="Speichern" Command="{Binding SaveCommand}" Margin="40"/>
-        
-    </StackPanel>
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/View/Images/Bücher.png"/>
+        </Grid.Background>
+        <Grid Style="{StaticResource MainStyle}">
+            <StackPanel Margin="10">
+                <TextBlock Style="{StaticResource MainTextStyle}" Text="Titel:"/>
+                <TextBox Text="{Binding Book.Titel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Style="{StaticResource MainTextStyle}" Text="Beschreibung:" Margin="10"/>
+                <TextBox Text="{Binding Book.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Style="{StaticResource MainTextStyle}" Text="Preis:" Margin="10"/>
+                <TextBox Text="{Binding Book.Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock Style="{StaticResource MainTextStyle}" Text="Autor:" Margin="10"/>
+                <TextBox Text="{Binding Book.Author, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <Button Content="Speichern" Command="{Binding SaveCommand}" Margin="40"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
 </Window>
