@@ -30,11 +30,11 @@
             <TextBlock Style="{StaticResource MainTextStyle}" Text="Bücher auf der liste:" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <ListView Grid.Row="1" Margin="10" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding Books}" SelectedItem="{Binding SelectedBook}" DisplayMemberPath="Titel"/>
             <Button Grid.Column="1" Content="Neues Buch hinzufügen" Command="{Binding ShowNewBookWindow}" Margin="5,5,2.5,5"/>
-            
+
             <DockPanel Grid.Column="2">
                 <Button Grid.Column="2" Content="Buch löschen" Command="{Binding DeleteCommand}" CommandParameter="{Binding SelectedBook}" Margin="2.5,5,5,5" DockPanel.Dock="Right"/>
                 <Button Content="Bearbeiten" Command="{Binding EditCommand}" CommandParameter="{Binding SelectedBook}" Margin="2.5,5,2.5,5"/>
-            
+
             </DockPanel>
             <StackPanel Orientation="Vertical" Margin="10" Grid.Row="1" Grid.Column="1">
                 <TextBlock Style="{StaticResource MainTextStyle}" Text="Buchtitel:"/>

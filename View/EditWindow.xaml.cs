@@ -16,18 +16,18 @@ using BookWishList.ViewModels;
 namespace BookWishList.View
 {
     /// <summary>
-    /// Interaction logic for NewBook.xaml
+    /// Interaction logic for EditWindow.xaml
     /// </summary>
-    public partial class NewBook : Window
+    public partial class EditWindow : Window
     {
-        private NewBookViewModel _NewBookViewModel;
-        public NewBook()
+        public EditWindowViewModel _editWindowViewModel;
+        public EditWindow()
         {
             InitializeComponent();
-            _NewBookViewModel = new NewBookViewModel();
-            DataContext = _NewBookViewModel;
-            _NewBookViewModel.Window = GetWindow(this);
-            Closing += _NewBookViewModel.OnWindowClosing;
+            this._editWindowViewModel = new EditWindowViewModel();
+            this.DataContext = this._editWindowViewModel;
+            this._editWindowViewModel.Window = GetWindow(this);
+            this.Closing += this._editWindowViewModel.OnWindowClosing;
         }
     }
 }

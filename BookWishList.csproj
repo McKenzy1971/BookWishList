@@ -58,10 +58,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\EditWindowViewModel.cs" />
     <Compile Include="ViewModels\NewBookViewModel.cs" />
+    <Compile Include="View\EditWindow.xaml.cs">
+      <DependentUpon>EditWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\NewBook.xaml.cs">
       <DependentUpon>NewBook.xaml</DependentUpon>
     </Compile>
+    <Page Include="View\EditWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\External Recources\MainDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

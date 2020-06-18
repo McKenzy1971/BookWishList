@@ -25,8 +25,9 @@ namespace BookWishList.View
         public MainWindow()
         {
             InitializeComponent();
-            _mainWindowViewModel = new MainWindowViewModel();
-            DataContext = _mainWindowViewModel;
+            this._mainWindowViewModel = new MainWindowViewModel();
+            this.DataContext = _mainWindowViewModel;
+            this._mainWindowViewModel.Window = GetWindow(this);
         }
     }
 }

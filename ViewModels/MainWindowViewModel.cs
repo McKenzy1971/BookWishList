@@ -16,10 +16,9 @@ namespace BookWishList.ViewModels
         public MainWindowViewModel()
         {
             this.Books = new ObservableCollection<Book>();
-            this.ShowNewBookWindow = new DelegateCommand<object>(ShowWindow, (b) => this._isActiv);
-            this.DeleteCommand = new DelegateCommand<Book>((Book b) => RemoveBook(b), (b) => this._isActiv);
-            this.EditCommand = new DelegateCommand<Book>((Book b) => MessageBox.Show("Aktuell noch nicht Implementiert. Wird in einer zukünftigen Version Hinzugefügt",
-                                                                                        "Info", MessageBoxButton.OK, MessageBoxImage.Information), (b) => this._isActiv);
+            this.ShowNewBookWindow = new DelegateCommand<object>(this.ShowWindow, (b) => this._isActiv);
+            this.DeleteCommand = new DelegateCommand<Book>((Book b) => this.RemoveBook(b), (b) => this._isActiv);
+            this.EditCommand = new DelegateCommand<Book>(this.EditBook, (b) => this.SelectedBook != null);
             this.MainFolder = new Folder(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\Bookywish");
             this.CheckDataExist(MainFolder.DirectoryPath + "Bookywish.xml");
         }
@@ -44,16 +43,17 @@ namespace BookWishList.ViewModels
                 }
             }
         }
-
+        public Window Window { get; set; }
         public Book SelectedBook
         {
-            get { return _selectedBook; }
+            get { return this._selectedBook; }
             set
             {
-                if (_selectedBook != value)
+                if (this._selectedBook != value)
                 {
-                    _selectedBook = value;
-                    OnPropertyChanged();
+                    this._selectedBook = value;
+                    this.OnPropertyChanged();
+                    this.EditCommand.RaiseCanExecuteChanged();
                 }
             }
         }
@@ -111,7 +111,8 @@ namespace BookWishList.ViewModels
             this.ChangeIsActiv(false);
             NewBook nb = new NewBook();
             nb.Show();
-            nb.ShowInTaskbar = true;
+            this.Window.Hide();
+            nb.ShowInTaskbar = false;
         }
         public void SaveBooks()
         {
@@ -128,6 +129,14 @@ namespace BookWishList.ViewModels
             this.ShowNewBookWindow.RaiseCanExecuteChanged();
             this.DeleteCommand.RaiseCanExecuteChanged();
             this.EditCommand.RaiseCanExecuteChanged();
+        }
+        public void EditBook(object o)
+        {
+            EditWindow eb = new EditWindow();
+            this.Window.Hide();
+            eb.Show();
+            eb.ShowInTaskbar = false;
+            eb.Activate();
         }
         #endregion
     }
