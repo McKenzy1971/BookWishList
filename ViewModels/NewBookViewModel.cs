@@ -54,8 +54,8 @@ namespace BookWishList.ViewModels
         public void OnWindowClosing(object sender, CancelEventArgs e)
         {
             ((MainWindow)Application.Current.MainWindow)._mainWindowViewModel.ChangeIsActiv(true);
+            ((MainWindow)Application.Current.MainWindow)._mainWindowViewModel.Window.Visibility = Visibility.Visible;
         }
-
         #endregion
     }
 }
