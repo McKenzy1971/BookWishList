@@ -3,7 +3,6 @@ D:\Development\Projects\C#\BookWishList\BookWishList\bin\Release\BookWishList.ex
 D:\Development\Projects\C#\BookWishList\BookWishList\bin\Release\BookWishList.pdb
 D:\Development\Projects\C#\BookWishList\BookWishList\bin\Release\SoftwareBase.dll
 D:\Development\Projects\C#\BookWishList\BookWishList\bin\Release\SoftwareBase.pdb
-D:\Development\Projects\C#\BookWishList\BookWishList\obj\Release\BookWishList.csprojAssemblyReference.cache
 D:\Development\Projects\C#\BookWishList\BookWishList\obj\Release\View\External Recources\MainDictionary.baml
 D:\Development\Projects\C#\BookWishList\BookWishList\obj\Release\View\MainWindow.baml
 D:\Development\Projects\C#\BookWishList\BookWishList\obj\Release\View\MainWindow.g.cs
@@ -19,3 +18,5 @@ D:\Development\Projects\C#\BookWishList\BookWishList\obj\Release\BookWishList.cs
 D:\Development\Projects\C#\BookWishList\BookWishList\obj\Release\BookWishList.csproj.CopyComplete
 D:\Development\Projects\C#\BookWishList\BookWishList\obj\Release\BookWishList.exe
 D:\Development\Projects\C#\BookWishList\BookWishList\obj\Release\BookWishList.pdb
+D:\Development\Projects\C#\BookWishList\BookWishList\obj\Release\View\EditWindow.g.cs
+D:\Development\Projects\C#\BookWishList\BookWishList\obj\Release\View\EditWindow.baml

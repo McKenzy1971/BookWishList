@@ -27,8 +27,8 @@
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
 
-            <TextBlock Style="{StaticResource MainTextStyle}" Text="Bücher auf der liste:" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <ListView Grid.Row="1" Margin="10" ScrollViewer.VerticalScrollBarVisibility="Auto" ItemsSource="{Binding Books}" SelectedItem="{Binding SelectedBook}" DisplayMemberPath="Titel"/>
+            <TextBlock Style="{StaticResource MainTextStyle}" Text="Bücher auf der Liste:" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <ListBox Grid.Row="1" Margin="10" ItemsSource="{Binding Books}" SelectedItem="{Binding SelectedBook}" DisplayMemberPath="Titel"/>
             <Button Grid.Column="1" Content="Neues Buch hinzufügen" Command="{Binding ShowNewBookWindow}" Margin="5,5,2.5,5"/>
 
             <DockPanel Grid.Column="2">

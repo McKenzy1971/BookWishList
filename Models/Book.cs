@@ -13,5 +13,6 @@ namespace BookWishList.Models
         public string Author { get; set; }
         public Theme Theme { get; set; } = Theme.Psychology;
         public DateTime ReadAt { get; set; }
+        public bool IsRead { get; set; } = false;
     }
 }

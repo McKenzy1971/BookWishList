@@ -28,7 +28,9 @@
                 <TextBox Text="{Binding Book.Author, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock Style="{StaticResource MainTextStyle}" Text="Thema:" Margin="10"/>
                 <ComboBox SelectedValue="{Binding Book.Theme, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged }" ItemsSource="{Binding Themes}" Margin="10"/>
-                <Button Content="Fertig!" Command="{Binding DelegateCommand}" Margin="10"/>
+                <TextBlock Style="{StaticResource MainTextStyle}" Text="Bereits gelesen?"/>
+                <CheckBox IsChecked="{Binding Book.IsRead}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="35,5"/>
+                <Button Content="Speichern" Command="{Binding DelegateCommand}" Margin="5"/>
             </StackPanel>
         </Grid>
     </Grid>

@@ -1,18 +1,27 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    
+
     <Style TargetType="Grid" x:Key="MainStyle">
         <Setter Property="Background" Value="#E5000000"/>
     </Style>
-    
+
     <Style TargetType="TextBlock" x:Key="MainTextStyle">
         <Setter Property="Foreground" Value="White"/>
         <Setter Property="FontWeight" Value="Bold"/>
-        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontSize" Value="12"/>
     </Style>
 
     <Style TargetType="TextBlock" x:Key="MainDatas">
         <Setter Property="Foreground" Value="White"/>
-        <Setter Property="Margin" Value="7"/>
+        <Setter Property="Margin" Value="6"/>
     </Style>
+
+    <Style TargetType="ListBoxItem">
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding IsRead}" Value="true">
+                <Setter Property="Background" Value="Green"/>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
 </ResourceDictionary>
