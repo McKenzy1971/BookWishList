@@ -18,6 +18,6 @@ D:\Development\Projects\C#\BookWishList\BookWishList\obj\Debug\BookWishList.cspr
 D:\Development\Projects\C#\BookWishList\BookWishList\obj\Debug\View\External Recources\MainDictionary.baml
 D:\Development\Projects\C#\BookWishList\BookWishList\obj\Debug\View\NewBook.g.cs
 D:\Development\Projects\C#\BookWishList\BookWishList\obj\Debug\View\NewBook.baml
-D:\Development\Projects\C#\BookWishList\BookWishList\obj\Debug\BookWishList.csprojAssemblyReference.cache
 D:\Development\Projects\C#\BookWishList\BookWishList\obj\Debug\View\EditWindow.g.cs
 D:\Development\Projects\C#\BookWishList\BookWishList\obj\Debug\View\EditWindow.baml
+D:\Development\Projects\C#\BookWishList\BookWishList\obj\Debug\BookWishList.csprojAssemblyReference.cache
