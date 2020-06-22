@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BookWishList.View"
+        xmlns:vm="clr-namespace:BookWishList.ViewModels"
         xmlns:System="clr-namespace:System;assembly=System"
         xmlns:test="clr-namespace:BookWishList.Models"
         mc:Ignorable="d"
@@ -12,6 +13,10 @@
     <Window.Resources>
         <ResourceDictionary Source="/View/External Recources/MainDictionary.xaml"/>
     </Window.Resources>
+    
+    <Window.DataContext>
+        <vm:NewBookViewModel/>
+    </Window.DataContext>
     
     <Grid>
         <Grid.Background>

@@ -13,11 +13,11 @@ D:\Development\Projects\C#\BookWishList\BookWishList\obj\Debug\BookWishList.pdb
 D:\Development\Projects\C#\BookWishList\BookWishList\obj\Debug\View\MainWindow.g.cs
 D:\Development\Projects\C#\BookWishList\BookWishList\obj\Debug\View\MainWindow.baml
 D:\Development\Projects\C#\BookWishList\BookWishList\bin\Debug\SoftwareBase.dll
-D:\Development\Projects\C#\BookWishList\BookWishList\bin\Debug\SoftwareBase.pdb
 D:\Development\Projects\C#\BookWishList\BookWishList\obj\Debug\BookWishList.csproj.CopyComplete
 D:\Development\Projects\C#\BookWishList\BookWishList\obj\Debug\View\External Recources\MainDictionary.baml
 D:\Development\Projects\C#\BookWishList\BookWishList\obj\Debug\View\NewBook.g.cs
 D:\Development\Projects\C#\BookWishList\BookWishList\obj\Debug\View\NewBook.baml
 D:\Development\Projects\C#\BookWishList\BookWishList\obj\Debug\View\EditWindow.g.cs
 D:\Development\Projects\C#\BookWishList\BookWishList\obj\Debug\View\EditWindow.baml
+D:\Development\Projects\C#\BookWishList\BookWishList\obj\Debug\GeneratedInternalTypeHelper.g.cs
 D:\Development\Projects\C#\BookWishList\BookWishList\obj\Debug\BookWishList.csprojAssemblyReference.cache

@@ -21,13 +21,11 @@ namespace BookWishList.View
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindowViewModel _mainWindowViewModel;
+        public MainWindowViewModel MainWindowViewModel => this.DataContext as MainWindowViewModel;
         public MainWindow()
         {
             InitializeComponent();
-            this._mainWindowViewModel = new MainWindowViewModel();
-            this.DataContext = _mainWindowViewModel;
-            this._mainWindowViewModel.Window = GetWindow(this);
+            this.MainWindowViewModel.Window = GetWindow(this);
         }
     }
 }

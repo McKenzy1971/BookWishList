@@ -20,14 +20,12 @@ namespace BookWishList.View
     /// </summary>
     public partial class EditWindow : Window
     {
-        public EditWindowViewModel _editWindowViewModel;
+        public EditWindowViewModel EditWindowViewModel => this.DataContext as EditWindowViewModel;
         public EditWindow()
         {
             InitializeComponent();
-            this._editWindowViewModel = new EditWindowViewModel();
-            this.DataContext = this._editWindowViewModel;
-            this._editWindowViewModel.Window = GetWindow(this);
-            this.Closing += this._editWindowViewModel.OnWindowClosing;
+            this.EditWindowViewModel.Window = GetWindow(this);
+            this.Closing += this.EditWindowViewModel.OnWindowClosing;
         }
     }
 }

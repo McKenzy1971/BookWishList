@@ -5,8 +5,8 @@ using System.Windows;
 using BookWishList.Models;
 using BookWishList.View;
 using SoftwareBase;
-using SoftwareBase.ViewModelBase;
 using SoftwareBase.Serialize;
+using SoftwareBase.ViewModelBase;
 
 namespace BookWishList.ViewModels
 {
@@ -58,7 +58,7 @@ namespace BookWishList.ViewModels
                 }
             }
         }
-        private Folder MainFolder { get; set; }
+        public Folder MainFolder { get; set; }
         public DelegateCommand<object> ShowNewBookWindow { get; set; }
         public DelegateCommand<Book> DeleteCommand { get; set; }
         public DelegateCommand<Book> EditCommand { get; set; }
@@ -69,7 +69,7 @@ namespace BookWishList.ViewModels
         {
             if (!this.MainFolder.CheckFileExist("Bookywish.xml"))
                 Serialize<ObservableCollection<Book>>.SaveData(new ObservableCollection<Book>() { new Book() { Titel = "Placeholder" } }, this.MainFolder.DirectoryPath + "Bookywish.xml");
-            LoadBooks();
+            this.LoadBooks();
         }
         private void LoadBooks()
         {

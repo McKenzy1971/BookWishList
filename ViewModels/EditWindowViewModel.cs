@@ -13,7 +13,7 @@ namespace BookWishList.ViewModels
         #region Constructor
         public EditWindowViewModel()
         {
-            this.Book = ((MainWindow)Application.Current.MainWindow)._mainWindowViewModel.SelectedBook;
+            this.Book = ((MainWindow)Application.Current.MainWindow).MainWindowViewModel.SelectedBook;
             this.DelegateCommand = new DelegateCommand<Book>(this.Save, null);
         }
         #endregion
@@ -35,7 +35,7 @@ namespace BookWishList.ViewModels
         }
         public void Save(object o)
         {
-            ((MainWindow)Application.Current.MainWindow)._mainWindowViewModel.SaveBooks();
+            ((MainWindow)Application.Current.MainWindow).MainWindowViewModel.SaveBooks();
             this.Window.Close();
         }
         #endregion

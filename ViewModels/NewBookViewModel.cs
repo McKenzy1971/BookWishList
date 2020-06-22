@@ -47,14 +47,14 @@ namespace BookWishList.ViewModels
         #region Methods
         public void Save(object o)
         {
-            ((MainWindow)Application.Current.MainWindow)._mainWindowViewModel.Books.Add(this.AddedBook);
-            ((MainWindow)Application.Current.MainWindow)._mainWindowViewModel.SaveBooks();
+            ((MainWindow)Application.Current.MainWindow).MainWindowViewModel.Books.Add(this.AddedBook);
+            ((MainWindow)Application.Current.MainWindow).MainWindowViewModel.SaveBooks();
             this.Window.Close();
         }
         public void OnWindowClosing(object sender, CancelEventArgs e)
         {
-            ((MainWindow)Application.Current.MainWindow)._mainWindowViewModel.ChangeIsActiv(true);
-            ((MainWindow)Application.Current.MainWindow)._mainWindowViewModel.Window.Visibility = Visibility.Visible;
+            ((MainWindow)Application.Current.MainWindow).MainWindowViewModel.ChangeIsActiv(true);
+            ((MainWindow)Application.Current.MainWindow).MainWindowViewModel.Window.Visibility = Visibility.Visible;
         }
         #endregion
     }

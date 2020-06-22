@@ -1,16 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 using BookWishList.ViewModels;
 
 namespace BookWishList.View
@@ -20,14 +8,12 @@ namespace BookWishList.View
     /// </summary>
     public partial class NewBook : Window
     {
-        private NewBookViewModel _NewBookViewModel;
+        public NewBookViewModel NewBookViewModel => this.DataContext as NewBookViewModel;
         public NewBook()
         {
             InitializeComponent();
-            _NewBookViewModel = new NewBookViewModel();
-            DataContext = _NewBookViewModel;
-            _NewBookViewModel.Window = GetWindow(this);
-            Closing += _NewBookViewModel.OnWindowClosing;
+            NewBookViewModel.Window = GetWindow(this);
+            Closing += NewBookViewModel.OnWindowClosing;
         }
     }
 }
